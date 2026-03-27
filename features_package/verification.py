@@ -1,22 +1,23 @@
-# verificar vitória
+def verify_victory(board, player):
+    """
+    Checks if the given player has won the game.
+    """
 
-
-def verificar_vitoria(tabuleiro, jogador):
-    # Linhas
-    for linha in tabuleiro:
-        if linha[0] == jogador and linha[2] == jogador and linha[4] == jogador:
+    # Rows
+    for row in board:
+        if row[0] == player and row[2] == player and row[4] == player:
             return True
 
-    # Colunas
+    # Columns
     for col in [0, 2, 4]:
-        if tabuleiro[0][col] == jogador and tabuleiro[1][col] == jogador and tabuleiro[2][col] == jogador:
+        if board[0][col] == player and board[1][col] == player and board[2][col] == player:
             return True
 
-    # Diagonais
-    if tabuleiro[0][0] == jogador and tabuleiro[1][2] == jogador and tabuleiro[2][4] == jogador:
+    # Diagonals
+    if board[0][0] == player and board[1][2] == player and board[2][4] == player:
         return True
 
-    if tabuleiro[0][4] == jogador and tabuleiro[1][2] == jogador and tabuleiro[2][0] == jogador:
+    if board[0][4] == player and board[1][2] == player and board[2][0] == player:
         return True
 
     return False

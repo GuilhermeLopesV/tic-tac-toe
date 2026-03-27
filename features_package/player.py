@@ -1,10 +1,11 @@
-# entrada dos jogadores
-
-def pedir_jogada(jogador):
+def request_a_play(player):
     while True:
-        jogada = input(f'Jogador {jogador}, escolha posição (1-9): ').upper()
+        """
+        Requests a valid move from the player.
+        """
+        play = input(f'Jogador {player}, escolha posição (1-9): ').upper()
 
-        if jogada in [str(i) for i in range(1, 10)]:
-            return jogada
+        if play in '123456789':
+            return play
 
         print('Entrada inválida!')

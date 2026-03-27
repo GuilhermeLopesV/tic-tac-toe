@@ -1,15 +1,15 @@
-from features_package.game import jogo
+from features_package.game import game
 
 
 def main():
     print('=== JOGO DA VELHA ===')
 
     while True:
-        opcao = input('(I)niciar ou (S)air: ').upper()
+        option = input('(I)niciar ou (S)air: ').strip().upper()
 
-        if opcao == 'I':
-            jogo()
-        elif opcao == 'S':
+        if option == 'I':
+            game()
+        elif option == 'S':
             print('Saindo...')
             break
         else:

@@ -1,4 +1,5 @@
-# funções auxiliares
-
-def limpar_tela():
+def clean_screen():
+    """
+    Clears the terminal screen (compatible with PyCharm).
+    """
     print("\n" * 50)

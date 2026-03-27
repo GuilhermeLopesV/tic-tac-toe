@@ -1,5 +1,3 @@
-# lógica do tabuleiro
-
 from . import utils
 from . import player
 from . import verification
@@ -7,20 +5,38 @@ from . import verification
 
 
 
-def criar_tabuleiro():
+def create_board():
+    """
+       Creates an empty game board.
+       """
     return [
         [' ', '|', ' ', '|', ' '],
         [' ', '|', ' ', '|', ' '],
         [' ', '|', ' ', '|', ' '],
     ]
 
-def mostrar_tabuleiro(tabuleiro):
-    for linha in tabuleiro:
-        print("".join(linha))
+def show_board(board):
+    """
+    Displays the board in the terminal.
+    """
+    for line in board:
+        print("".join(line))
 
 
-def fazer_jogada(tabuleiro, posicao, jogador):
-    mapa = {
+def make_move(board, position, gamester):
+    """
+        Executes a move on the board.
+
+        Args:
+            board (list): Game board
+            position (str): Position chosen (1-9)
+            player (str): Current player ('X' or 'O')
+
+        Returns:
+            bool: True if move is valid, False otherwise
+        """
+
+    position_map = {
         '1': (0, 0),
         '2': (0, 2),
         '3': (0, 4),
@@ -32,45 +48,45 @@ def fazer_jogada(tabuleiro, posicao, jogador):
         '9': (2, 4),
     }
 
-    linha, coluna = mapa[posicao]
+    row, col = position_map[position]
 
-    if tabuleiro[linha][coluna] != ' ':
+    if board[row][col] != ' ':
         return False
 
-    tabuleiro[linha][coluna] = jogador
+    board[row][col] = gamester
     return True
 
 
 
-def jogo():
-    tabuleiro = criar_tabuleiro()
-    jogador_atual = 'X'
-    jogadas = 0
+def game():
+    board = create_board()
+    current_player = 'X'
+    plays = 0
 
     while True:
-        utils.limpar_tela()
-        mostrar_tabuleiro(tabuleiro)
+        utils.clean_screen()
+        show_board(board)
 
-        jogada = player.pedir_jogada(jogador_atual)
+        play = player.request_a_play(current_player)
 
-        if not fazer_jogada(tabuleiro, jogada, jogador_atual):
+        if not make_move(board, play, current_player):
             print('Posição já ocupada!')
             input('Pressione ENTER para continuar...')
             continue
 
-        jogadas += 1
+        plays += 1
 
-        if verification.verificar_vitoria(tabuleiro, jogador_atual):
-            utils.limpar_tela()
-            mostrar_tabuleiro(tabuleiro)
-            print(f'Jogador {jogador_atual} venceu!')
+        if verification.verify_victory(board, current_player):
+            utils.clean_screen()
+            show_board(board)
+            print(f'Jogador {current_player} venceu!')
             break
 
-        if jogadas == 9:
-            utils.limpar_tela()
-            mostrar_tabuleiro(tabuleiro)
+        if plays == 9:
+            utils.clean_screen()
+            show_board(board)
             print('Empate!')
             break
 
         # troca jogador
-        jogador_atual = 'O' if jogador_atual == 'X' else 'X'
+        current_player = 'O' if current_player == 'X' else 'X'
